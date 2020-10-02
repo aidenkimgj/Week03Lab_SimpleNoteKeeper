@@ -17,27 +17,6 @@ public class NoteServlet extends HttpServlet {
         
         String action = request.getParameter("edit");
         
-        if(action == null) {   
-            
-            String path = getServletContext().getRealPath("/WEB-INF/note.txt");
-            // to read files
-            BufferedReader br = new BufferedReader(new FileReader(new File(path)));
-            
-            String lineStr;
-            ArrayList line = new ArrayList();
-            int i = 0;
-            
-            while((lineStr = br.readLine()) != null) {
-                line.add(lineStr);
-            }
-            br.close();
-            
-            Note note = new Note(line.get(0).toString(), line.get(1).toString());
-            
-            request.setAttribute("note", note);
-            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
-            
-        }
         String path = getServletContext().getRealPath("/WEB-INF/note.txt");
             // to read files
             BufferedReader br = new BufferedReader(new FileReader(new File(path)));
@@ -45,7 +24,7 @@ public class NoteServlet extends HttpServlet {
             String lineStr;
             ArrayList line = new ArrayList();
             int i = 0;
-           
+            
             while((lineStr = br.readLine()) != null) {
                 line.add(lineStr);
             }
@@ -54,6 +33,11 @@ public class NoteServlet extends HttpServlet {
             Note note = new Note(line.get(0).toString(), line.get(1).toString());
             
             request.setAttribute("note", note);
+        
+        if(action == null) {   
+            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
+        }
+        
         getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
                    
         
