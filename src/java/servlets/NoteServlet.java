@@ -18,13 +18,12 @@ public class NoteServlet extends HttpServlet {
         String action = request.getParameter("edit");
         
         String path = getServletContext().getRealPath("/WEB-INF/note.txt");
-            // to read files
+           
         BufferedReader br = new BufferedReader(new FileReader(new File(path)));
 
         String lineStr;
         ArrayList line = new ArrayList();
-        int i = 0;
-
+        
         while((lineStr = br.readLine()) != null) {
             line.add(lineStr);
         }
